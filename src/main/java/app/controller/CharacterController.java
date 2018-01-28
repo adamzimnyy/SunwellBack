@@ -29,7 +29,7 @@ public class CharacterController {
     @RequestMapping(value = {"/{name}", "{name}"}, method = RequestMethod.GET)
     public @ResponseBody
     Character getCharacter(@PathVariable(value = "name") String name) {
-
+        System.out.println("getCharacter -> "+name);
         Character c = characterRepository.findByName(name);
         List<Item> items = new ArrayList<>();
         ZonedDateTime now = ZonedDateTime.now();
@@ -38,6 +38,7 @@ public class CharacterController {
         try {
             int sum = 0, total = 0;
             if (c == null || c.getLastUpdated().toInstant().isBefore(dayAgo.toInstant())) {
+                System.out.println("\t"+name+" not found or not uo to date. Parsing...");
                 c = CharacterParser.parse(name);
             }
             c.setName(name);
