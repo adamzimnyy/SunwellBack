@@ -26,10 +26,11 @@ public class CharacterController {
     @Autowired
     ItemRepository itemRepository;
 
+    @CrossOrigin(origins = "https://sunwell-front.herokuapp.com")
     @RequestMapping(value = {"/{name}", "{name}"}, method = RequestMethod.GET)
     public @ResponseBody
     Character getCharacter(@PathVariable(value = "name") String name) {
-        System.out.println("getCharacter -> "+name);
+        System.out.println("getCharacter -> " + name);
         Character c = characterRepository.findByName(name);
         List<Item> items = new ArrayList<>();
         ZonedDateTime now = ZonedDateTime.now();
@@ -38,7 +39,7 @@ public class CharacterController {
         try {
             int sum = 0, total = 0;
             if (c == null || c.getLastUpdated().toInstant().isBefore(dayAgo.toInstant())) {
-                System.out.println("\t"+name+" not found or not up to date. Parsing...");
+                System.out.println("\t" + name + " not found or not up to date. Parsing...");
                 c = CharacterParser.parse(name);
             }
             c.setName(name);
