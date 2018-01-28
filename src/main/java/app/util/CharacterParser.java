@@ -2,6 +2,7 @@ package app.util;
 
 import app.model.Character;
 import app.model.Item;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -35,6 +36,8 @@ public class CharacterParser {
         }
         String info = race.text();
         character.setInfo(info);
+        System.out.println(character);
+        character.setItems(items);
         character.setItemIds(ids);
         return character;
     }

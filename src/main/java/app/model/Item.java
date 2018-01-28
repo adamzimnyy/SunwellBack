@@ -24,6 +24,15 @@ public class Item implements Serializable {
     private boolean heroic;
     private int quality;
     private String slot;
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public String getName() {
         return name;
