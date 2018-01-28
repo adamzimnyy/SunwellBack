@@ -52,7 +52,9 @@ public class CharacterController {
                     itemRepository.save(item);
                     items.add(item);
                 }
-                sum += item != null ? item.getItemLevel() : 0;
+                if(item.getSlot().equalsIgnoreCase("shirt") || item.getSlot().equalsIgnoreCase("tabard"))
+                    continue;
+                sum += item.getItemLevel();
                 total++;
             }
             c.setItemLevel(sum / (float) total);
