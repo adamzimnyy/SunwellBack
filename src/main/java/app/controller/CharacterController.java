@@ -26,7 +26,7 @@ public class CharacterController {
     @Autowired
     ItemRepository itemRepository;
 
-    @CrossOrigin(origins = "https://sunwell-front.herokuapp.com")
+    @CrossOrigin(origins = "https://sunwell.herokuapp.com")
     @RequestMapping(value = {"/{name}", "{name}"}, method = RequestMethod.GET)
     public @ResponseBody
     Character getCharacter(@PathVariable(value = "name") String name) {
