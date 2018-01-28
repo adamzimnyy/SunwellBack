@@ -43,6 +43,7 @@ public class CharacterController {
                 c = CharacterParser.parse(name);
             }
             c.setName(name);
+            System.out.println(name +" found to be "+c.getInfo());
             for (Integer id : c.getItemIds()) {
                 Item item;
                 if ((item = itemRepository.findById(id)) != null) {
