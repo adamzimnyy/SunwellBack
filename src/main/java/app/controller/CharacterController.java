@@ -39,7 +39,7 @@ public class CharacterController {
         try {
             int sum = 0, total = 0;
             if (c == null || c.getLastUpdated().toInstant().isBefore(dayAgo.toInstant())) {
-                System.out.println("\t" + name + " not found or not up to date. Parsing...");
+                System.out.println(name + " not found or not up to date. Parsing...");
                 c = CharacterParser.parse(name);
             }
             c.setName(name);
@@ -49,6 +49,7 @@ public class CharacterController {
                     items.add(item);
                 } else {
                     item = ItemParser.parse(id);
+                    System.out.println("Item "+item.getName()+" added.");
                     itemRepository.save(item);
                     items.add(item);
                 }
@@ -63,6 +64,7 @@ public class CharacterController {
             characterRepository.save(c);
         } catch (IOException e) {
             if (e instanceof HttpStatusException) {
+                System.out.println("Character "+name+" doesn't exist.");
                 return null;
             }
         }

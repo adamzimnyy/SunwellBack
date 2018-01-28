@@ -27,7 +27,6 @@ public class CharacterParser {
         ArrayList<Item> items = new ArrayList<>();
         Document doc = Jsoup.connect(BASE_URL + "/" + REALM + "/" + characterName).get();
         Element race = doc.select("span[class*=character-info]").first();
-        System.out.println(race);
         List<Integer> ids = new ArrayList<>();
         Elements links = doc.select("a[href*=db.darkwizard.pl?item=]");
         for (Element e : links) {
@@ -36,7 +35,6 @@ public class CharacterParser {
         }
         String info = race.text();
         character.setInfo(info);
-        System.out.println(character);
         character.setItems(items);
         character.setItemIds(ids);
         return character;
