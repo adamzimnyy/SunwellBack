@@ -55,6 +55,7 @@ public class CharacterController {
                     itemRepository.save(item);
                     items.add(item);
                 }
+                sum += item.getItemLevel();
                 total++;
             }
             c.setItemLevel(sum / (float) total);
