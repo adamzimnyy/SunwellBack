@@ -55,6 +55,9 @@ public class CharacterController {
                     itemRepository.save(item);
                     items.add(item);
                 }
+                if(item.getSlot().equals("Tabard") || item.getSlot().equals("Shirt")){
+                    continue;
+                }
                 sum += item.getItemLevel();
                 total++;
             }
