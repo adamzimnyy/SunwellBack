@@ -55,8 +55,10 @@ public class Gearscore {
             if (c.getInfo().contains("Hunter")) {
                 if (item.getSlot().equals("Ranged"))
                     itemGs = Gearscore.getItemScore(item, "Two-Hand");
-                if (item.getSlot().endsWith("Hand"))
+                else if (item.getSlot().endsWith("Hand"))
                     itemGs = Gearscore.getItemScore(item, "Ranged");
+                else
+                    itemGs = Gearscore.getItemScore(item, null);
             } else if (isFuryWarrior && item.getSlot().equals("Two-Hand")) {
                 itemGs = Gearscore.getItemScore(item, "One-Hand");
             } else
@@ -150,7 +152,7 @@ public class Gearscore {
                 case "Off Hand":
                     return WEAPONOFFHAND;
                 default:
-                    System.out.println("Slot '"+slotName+"' not found on list, returning 0");
+                    System.out.println("Slot '" + slotName + "' not found on list, returning 0");
                     return 0;
             }
         }
