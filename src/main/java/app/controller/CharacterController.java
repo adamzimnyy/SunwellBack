@@ -34,14 +34,13 @@ public class CharacterController {
         System.out.println("getCharacter -> " + name);
         Character c = characterRepository.findByName(name);
         List<Item> items = new ArrayList<>();
-        ZonedDateTime now = ZonedDateTime.now();
-        ZonedDateTime ago = now.plusHours(-6);
 
         try {
             int sum = 0, total = 0;
-            if (c == null || c.getGearscore() == 0 || c.getLastUpdated().toInstant().isBefore(ago.toInstant())) {
+            if (c == null || c.getGearscore() == 0) {
                 System.out.println(name + " not found or not up to date. Parsing...");
                 c = CharacterParser.parse(name);
+                if(c == null) return null;
             }
             c.setName(name);
             System.out.println(name + " found: " + c.getInfo());
@@ -51,7 +50,6 @@ public class CharacterController {
                     items.add(item);
                 } else {
                     item = ItemParser.parse(id);
-                    System.out.println("Item " + item.getName() + " added.");
                     itemRepository.save(item);
                     items.add(item);
                 }
