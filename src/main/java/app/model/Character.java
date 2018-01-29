@@ -17,6 +17,23 @@ public class Character {
     String itemIds;
     Date lastUpdated;
 
+    float itemLevel;
+    String info;
+
+    int gearscore=0;
+
+    public void setItemIds(String itemIds) {
+        this.itemIds = itemIds;
+    }
+
+    public int getGearscore() {
+        return gearscore;
+    }
+
+    public void setGearscore(int gearscore) {
+        this.gearscore = gearscore;
+    }
+
     public Date getLastUpdated() {
         return lastUpdated;
     }
@@ -47,8 +64,6 @@ public class Character {
         this.itemLevel = itemLevel;
     }
 
-    float itemLevel;
-    String info;
 
     public String getName() {
         return name;

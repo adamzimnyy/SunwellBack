@@ -5,6 +5,7 @@ import app.model.Item;
 import app.repository.CharacterRepository;
 import app.repository.ItemRepository;
 import app.util.CharacterParser;
+import app.util.Gearscore;
 import app.util.ItemParser;
 import org.jsoup.HttpStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,38 +35,36 @@ public class CharacterController {
         Character c = characterRepository.findByName(name);
         List<Item> items = new ArrayList<>();
         ZonedDateTime now = ZonedDateTime.now();
-        ZonedDateTime dayAgo = now.plusDays(-1);
+        ZonedDateTime ago = now.plusHours(-6);
 
         try {
             int sum = 0, total = 0;
-            if (c == null || c.getLastUpdated().toInstant().isBefore(dayAgo.toInstant())) {
+            if (c == null || c.getGearscore() == 0 || c.getLastUpdated().toInstant().isBefore(ago.toInstant())) {
                 System.out.println(name + " not found or not up to date. Parsing...");
                 c = CharacterParser.parse(name);
             }
             c.setName(name);
-            System.out.println(name +" found to be "+c.getInfo());
+            System.out.println(name + " found: " + c.getInfo());
             for (Integer id : c.getItemIds()) {
                 Item item;
                 if ((item = itemRepository.findById(id)) != null) {
                     items.add(item);
                 } else {
                     item = ItemParser.parse(id);
-                    System.out.println("Item "+item.getName()+" added.");
+                    System.out.println("Item " + item.getName() + " added.");
                     itemRepository.save(item);
                     items.add(item);
                 }
-                if(item.getSlot().equalsIgnoreCase("shirt") || item.getSlot().equalsIgnoreCase("tabard"))
-                    continue;
-                sum += item.getItemLevel();
                 total++;
             }
             c.setItemLevel(sum / (float) total);
             c.setItems(items);
+            c.setGearscore((int) Math.round(Gearscore.getCharacterScore(c)));
             c.setLastUpdated(new Date());
             characterRepository.save(c);
         } catch (IOException e) {
             if (e instanceof HttpStatusException) {
-                System.out.println("Character "+name+" doesn't exist.");
+                System.out.println("Character " + name + " doesn't exist.");
                 return null;
             }
         }
