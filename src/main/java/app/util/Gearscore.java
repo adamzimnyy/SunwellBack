@@ -61,10 +61,9 @@ public class Gearscore {
                 itemGs = Gearscore.getItemScore(item, "One-Hand");
             } else
                 itemGs = Gearscore.getItemScore(item, null);
-
             gearscore += itemGs;
         }
-       return gearscore;
+        return gearscore;
     }
 
     static class FormulaA {
@@ -128,7 +127,7 @@ public class Gearscore {
                     return TRINKET;
                 case "Two-Hand":
                     return TWOHWEAPON;
-                case "Held in Off-Hand":
+                case "Held In Off-Hand":
                     return HOLDABLE;
                 case "Ranged":
                     return RANGED;
@@ -151,6 +150,7 @@ public class Gearscore {
                 case "Off Hand":
                     return WEAPONOFFHAND;
                 default:
+                    System.out.println("Slot '"+slotName+"' not found on list, returning 0");
                     return 0;
             }
         }
