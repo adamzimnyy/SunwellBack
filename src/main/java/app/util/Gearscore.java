@@ -11,7 +11,7 @@ import java.util.List;
 public class Gearscore {
 
     public static double getItemScore(Item item, String slotMod) {
-        if (item == null) return 0;
+        if (item == null || item.getSlot().equals("Tabard") || item.getSlot().equals("Shirt")) return 0;
         float qualityScale = 1;
         int rarity = item.getQuality();
         float itemLevel = item.getItemLevel();
