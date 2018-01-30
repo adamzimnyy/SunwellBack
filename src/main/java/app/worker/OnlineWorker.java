@@ -20,7 +20,7 @@ public class OnlineWorker {
     @Autowired
     OnlineRepository onlineRepository;
 
-    @Scheduled(cron ="0 0/30 0 ? * * *")
+    @Scheduled(cron ="0 0/30 0 ? * *")
     public void checkOnline() {
         Online on = OnlineParser.parse();
         onlineRepository.save(on);
