@@ -25,9 +25,11 @@ public class OnlineController {
     @CrossOrigin
     @RequestMapping(value = {"/online", "online"}, method = RequestMethod.POST)
     public void saveData(@RequestBody List<Online> list) {
+        System.out.println("Saving online data: "+list.size()+" records.");
         for(Online o : list){
             onlineRepository.save(o);
         }
+        System.out.println("Done saving.");
     }
 
     @CrossOrigin
