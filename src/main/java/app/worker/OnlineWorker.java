@@ -17,14 +17,10 @@ import java.util.Date;
 @Component
 public class OnlineWorker {
 
-
-    private static final int CHARACTER_HOURS = 6;
-    private static final int ONLINE_DAYS = 7;
-
     @Autowired
     OnlineRepository onlineRepository;
 
-    @Scheduled(cron ="0 0/15 0 ? * * *")
+    @Scheduled(cron ="0 0/30 0 ? * * *")
     public void checkOnline() {
         Online on = OnlineParser.parse();
         onlineRepository.save(on);
