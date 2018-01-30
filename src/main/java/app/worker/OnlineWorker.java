@@ -24,7 +24,7 @@ public class OnlineWorker {
     @Autowired
     OnlineRepository onlineRepository;
 
-    @Scheduled(fixedRate = 1000 * 60 * 10)
+    @Scheduled(cron ="0 0/15 0 ? * * *")
     public void checkOnline() {
         Online on = OnlineParser.parse();
         onlineRepository.save(on);
