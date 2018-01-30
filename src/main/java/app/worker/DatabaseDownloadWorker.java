@@ -1,8 +1,9 @@
-package app.util;
+package app.worker;
 
 import app.model.Item;
 import app.repository.CharacterRepository;
 import app.repository.ItemRepository;
+import app.util.ItemParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.ClassPathResource;

@@ -18,17 +18,15 @@ public class CharacterParser {
 
     public static final String BASE_URL = "https://sunwell.pl/armory";
 
-    public static final String REALM = "Feronis";
 
-
-    public static Character parse(String characterName) {
+    public static Character parse(String characterName,String realm) {
         long startTime = System.currentTimeMillis();
 
         Character character = new Character();
         ArrayList<Item> items = new ArrayList<>();
         Document doc;
         try {
-            doc = Jsoup.connect(BASE_URL + "/" + REALM + "/" + characterName).get();
+            doc = Jsoup.connect(BASE_URL + "/" + realm + "/" + characterName).get();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -46,7 +44,7 @@ public class CharacterParser {
         character.setItemIds(ids);
         long endTime = System.currentTimeMillis();
 
-        System.out.println("Parsing of " + BASE_URL + "/" + REALM + "/" + characterName + " took " + (endTime - startTime) + " milliseconds.");
+        System.out.println("Parsing of " + BASE_URL + "/" + realm + "/" + characterName + " took " + (endTime - startTime) + " milliseconds.");
         return character;
     }
 }
