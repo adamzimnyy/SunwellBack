@@ -1,5 +1,7 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +18,9 @@ public class Online {
     int id;
     int feronis;
     int angrathar;
+
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss Z")
     Date date;
 
     public int getId() {

@@ -23,10 +23,18 @@ public class OnlineController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = {"/online", "online"}, method = RequestMethod.POST)
+    public void saveData(@RequestBody List<Online> list) {
+        for(Online o : list){
+            onlineRepository.save(o);
+        }
+    }
+
+    @CrossOrigin
     @RequestMapping(value = {"/online/now", "online/now"}, method = RequestMethod.GET)
     public @ResponseBody
     void getCurrent() {
         Online on = OnlineParser.parse();
-        System.out.println("Feronis: "+on.getFeronis()+", Angrathar: "+on.getAngrathar());
+        System.out.println("Feronis: " + on.getFeronis() + ", Angrathar: " + on.getAngrathar());
     }
 }
