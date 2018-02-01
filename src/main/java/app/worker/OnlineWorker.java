@@ -22,7 +22,7 @@ public class OnlineWorker {
     OnlineRepository onlineRepository;
 
 
-    @Scheduled(cron = "0 0/30 * * * *")
+    @Scheduled(cron = "0 0/20 * * * *")
     void getOnline() {
         Online on = OnlineParser.parse();
         System.out.println("Saving online stats: Feronis = " + on.getFeronis() + ", Angrathar = " + on.getAngrathar());
