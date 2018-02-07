@@ -16,7 +16,7 @@ public class OnlineParser {
     public static Online parse() {
         Online online = new Online();
         try {
-            Document doc = Jsoup.connect("http://sunwell.pl").get();
+            Document doc = Jsoup.connect("http://sunwell.pl").cookie("_ICC_Open","1; expires=Thu, 08 Feb 2019 10:24:04 GMT1").get();
             Elements el = doc.select("div[class=status__bar__info] > p");
             String fer = el.get(0).text().replaceAll("[A-Za-z]", "");
             String ang = el.get(1).text().replaceAll("[A-Za-z]", "");

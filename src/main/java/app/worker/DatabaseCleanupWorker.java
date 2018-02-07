@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class DatabaseCleanupWorker {
     OnlineRepository onlineRepository;
 
     @Scheduled(fixedRate = 1000 * 60 * 10)
+    @Transactional
     public void cleanupCharacterDatabase() {
         ZonedDateTime now = ZonedDateTime.now();
         ZonedDateTime hoursAgo = now.plusHours(-CHARACTER_HOURS);
@@ -32,6 +34,7 @@ public class DatabaseCleanupWorker {
     }
 
     @Scheduled(fixedRate = 1000 * 60 * 10)
+    @Transactional
     public void cleanupOnlineDatabase() {
         ZonedDateTime now = ZonedDateTime.now();
         ZonedDateTime ago = now.plusDays(-ONLINE_DAYS);

@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import retrofit2.Call;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 
 /**
@@ -23,6 +24,7 @@ public class OnlineWorker {
 
 
     @Scheduled(cron = "0 0/20 * * * *")
+    @Transactional
     void getOnline() {
         try {Online on = OnlineParser.parse();
         System.out.println("Saving online stats: Feronis = " + on.getFeronis() + ", Angrathar = " + on.getAngrathar());
