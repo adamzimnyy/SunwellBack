@@ -24,12 +24,15 @@ public class OnlineWorker {
 
     @Scheduled(cron = "0 0/20 * * * *")
     void getOnline() {
-        Online on = OnlineParser.parse();
+        try {Online on = OnlineParser.parse();
         System.out.println("Saving online stats: Feronis = " + on.getFeronis() + ", Angrathar = " + on.getAngrathar());
         onlineRepository.save(on);
 
-        Call<Void> wakeUpCall = ((WakeUpApi) RetrofitBuilder.getService(WakeUpApi.class, "http://sunwell-back.herokuapp.com")).wakeUp();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        Call<Void> wakeUpCall = ((WakeUpApi) RetrofitBuilder.getService(WakeUpApi.class, "http://sunwell-back.herokuapp.com")).wakeUp();
         try {
             wakeUpCall.execute();
         } catch (IOException e) {
