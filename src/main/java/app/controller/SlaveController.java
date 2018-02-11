@@ -16,7 +16,7 @@ public class SlaveController {
     SlaveRepository slaveRepository;
 
     @CrossOrigin
-    @RequestMapping(value = {"/slave", "slave"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/slave", "slave"}, method = RequestMethod.GET)
     public @ResponseBody
     List<Slave> getSlaves() {
        return slaveRepository.findAll();
