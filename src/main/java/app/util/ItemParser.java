@@ -17,9 +17,11 @@ public class ItemParser {
     static final String BASE_URL = "http://db.darkwizard.pl?item=";
 
     public static Item parse(int id) throws IOException {
+        System.out.println("Parsing item " + id + ".");
         long startTime = System.currentTimeMillis();
         Document itempage = Jsoup.connect(BASE_URL + id).get();
-       Pattern p = Pattern.compile("Icon.create\\('[a-z0-9_]*'");
+
+         Pattern p = Pattern.compile("Icon.create\\('[a-z0-9_\\-]*'");
         Matcher m = p.matcher(itempage.toString());
         if (m.find()) {
             String iconUnprocessed = m.group();
@@ -42,10 +44,11 @@ public class ItemParser {
 
 
                 long endTime = System.currentTimeMillis();
-                System.out.println("Item "+ i.getName()+" added. Parsing took " + (endTime - startTime) + " milliseconds.");
+                System.out.println("Item " + i.getName() + " added. Parsing took " + (endTime - startTime) + " milliseconds.");
                 return i;
             }
         }
+        System.out.println("Item " + id + " not found.");
         return null;
     }
 }

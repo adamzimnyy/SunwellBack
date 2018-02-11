@@ -4,6 +4,7 @@ import app.model.Online;
 import app.repository.OnlineRepository;
 import app.util.OnlineParser;
 import app.util.RetrofitBuilder;
+import app.util.SlaveMarketParser;
 import app.util.WakeUpApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -40,6 +41,7 @@ public class OnlineWorker {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 }

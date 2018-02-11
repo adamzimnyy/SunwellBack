@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +29,7 @@ public class CharacterController {
     @CrossOrigin
     @RequestMapping(value = {"/character/{realm}/{name}", "character/{realm}/{name}"}, method = RequestMethod.GET)
     public @ResponseBody
-    Character getCharacter(@PathVariable(value = "name") String name,@PathVariable(value = "realm") String realm) {
+    Character getCharacter(@PathVariable(value = "name") String name, @PathVariable(value = "realm") String realm) {
         System.out.println("getCharacter -> " + name);
         Character c = characterRepository.findByName(name);
         List<Item> items = new ArrayList<>();
@@ -38,8 +37,8 @@ public class CharacterController {
             int sum = 0, total = 0;
             if (c == null || c.getGearscore() == 0) {
                 System.out.println(name + " not found or not up to date. Parsing...");
-                c = CharacterParser.parse(name,realm);
-                if(c == null) return null;
+                c = CharacterParser.parse(name, realm);
+                if (c == null) return null;
             }
             c.setName(name);
             System.out.println(name + " found: " + c.getInfo());
@@ -49,10 +48,14 @@ public class CharacterController {
                     items.add(item);
                 } else {
                     item = ItemParser.parse(id);
-                    itemRepository.save(item);
+                    if (item != null) {
+                        if(item.getItemLevel() > 180)
+                        itemRepository.save(item);
+                        items.add(item);
+                    }
                     items.add(item);
                 }
-                if(item.getSlot().equals("Tabard") || item.getSlot().equals("Shirt")){
+                if (item.getSlot().equals("Tabard") || item.getSlot().equals("Shirt")) {
                     continue;
                 }
                 sum += item.getItemLevel();

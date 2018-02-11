@@ -46,6 +46,7 @@ public class Character {
         String[] split = this.itemIds.split(",");
         List<Integer> ints = new ArrayList<>();
         for(String s : split)
+            if(!s.isEmpty())
             ints.add(Integer.parseInt(s));
         return ints;
     }
