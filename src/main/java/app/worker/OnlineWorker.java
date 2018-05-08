@@ -35,13 +35,13 @@ public class OnlineWorker {
             e.printStackTrace();
         }
 
-        Call<Void> wakeUpCall = ((WakeUpApi) RetrofitBuilder.getService(WakeUpApi.class, "http://sunwell-back.herokuapp.com")).wakeUp();
+      /*  Call<Void> wakeUpCall = ((WakeUpApi) RetrofitBuilder.getService(WakeUpApi.class, "http://sunwell-back.herokuapp.com")).wakeUp();
         try {
             wakeUpCall.execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
     }
 
 }
